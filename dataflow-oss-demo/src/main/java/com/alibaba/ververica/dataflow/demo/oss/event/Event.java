@@ -39,12 +39,12 @@ public class Event {
 
     public static Event fromString(String eventStr) {
         String[] split = eventStr.split(",");
-        return new Event(
-                Integer.parseInt(split[0]),
-                split[1],
-                Integer.parseInt(split[2]),
-                Integer.parseInt(split[3]),
-                Long.parseLong(split[4]));
+        int id = split.length > 0 ? Integer.parseInt(split[0]) : -1;
+        String name = split.length > 1 ? split[1] : "INVALID";
+        int action = split.length > 2 ? Integer.parseInt(split[2]) : -1;
+        int productionId = split.length > 3 ? Integer.parseInt(split[3]) : -1;
+        long eventTime = split.length > 4 ? Long.parseLong(split[4]) : -1;
+        return new Event(id, name, action, productionId, eventTime);
     }
 
     public long getEventTime() {
