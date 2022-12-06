@@ -72,7 +72,7 @@ public class OssDemoJob {
                 KafkaSource.<Event>builder()
                         .setBootstrapServers(params.get(KAFKA_BROKERS_ARG))
                         .setTopics(params.get(INPUT_TOPIC_ARG))
-                        .setStartingOffsets(OffsetsInitializer.latest())
+                        .setStartingOffsets(OffsetsInitializer.earliest())
                         .setGroupId(params.get(INPUT_TOPIC_GROUP_ARG))
                         .setDeserializer(new EventDeSerializationSchema())
                         .build();
@@ -94,8 +94,9 @@ public class OssDemoJob {
         // Compile and submit the job
         env.execute();
 
-        // flink run -t yarn-per-job -d dataflow-oss-demo-1.0-SNAPSHOT.jar  --outputOssDir
-        // oss://<YOUR_TARGET_BUCKET>/oss_kafka_test --kafkaBrokers core-1-1:9092 --inputTopic
-        // kafka-test-topic --inputTopicGroup my-group
+        //         flink run -t yarn-per-job -d dataflow-oss-demo-1.0-SNAPSHOT.jar  --outputOssDir
+        //         oss://<YOUR_TARGET_BUCKET>/oss_kafka_test --kafkaBrokers core-1-1:9092
+        // --inputTopic
+        //         kafka-test-topic --inputTopicGroup my-group
     }
 }
